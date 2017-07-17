@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('access/accounts','Access\AccountController',
+    ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]);
