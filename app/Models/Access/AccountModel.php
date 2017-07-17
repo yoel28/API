@@ -6,16 +6,11 @@ use Api\Models\Common\BaseModel;
 
 class AccountModel extends BaseModel
 {
-
     public function add_hidden(){
-        $this->addHidden(
-            [
-                'account_id'
-            ]
-        );
+        $this->addHidden(['account_id']);
     }
 
-    public function add_fillable(){
+    public function add_fillabel(){
         $this->addFillabel(
             [
                 "address",
@@ -33,5 +28,4 @@ class AccountModel extends BaseModel
             ]
         );
     }
-
 }
