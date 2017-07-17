@@ -2,7 +2,7 @@
 
 namespace Api\Http\Controllers\Auth;
 
-use Api\User;
+use Api\UserModel;
 use Api\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -58,11 +58,11 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return User
+     * @return UserModel
      */
     protected function create(array $data)
     {
-        return User::create([
+        return UserModel::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
