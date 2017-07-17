@@ -12,7 +12,8 @@ class BaseController extends Controller
         $this->model =  $model;
     }
 
-    protected function index(){
+    protected function index(Request $request){
+//        var_dump($request->query('max','max'));
         return  response()->json(
             ['list'=>$this->model::all()],
             200
