@@ -1,11 +1,8 @@
 <?php
 
 namespace Api\Http\Controllers\Common;
-
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use DB;
-
 
 class BaseController extends Controller
 {
@@ -16,32 +13,40 @@ class BaseController extends Controller
     }
 
     protected function index(){
-        return [
-            'list'=>$this->model::all(),
-        ];
+        return  response()->json(
+            ['list'=>$this->model::all()],
+            200
+        );
     }
 
     protected function store(Request $request)
     {
-        $this->model::create($request->all());
-        return ['created' => true];
+        $data = $this->model::create($request->all());
+        return response()->json($data,201);
     }
 
     protected function update(Request $request, $id)
     {
-        $value = $this->model::find($id);
-        $value->update($request->all());
-        return ['updated' => true];
+        $data = $this->model::find($id);
+        $data->update($request->all());
+        return response()->json($data,200);
     }
 
     protected function destroy($id)
     {
         $this->model::destroy($id);
-        return ['deleted' => true];
+        return response()->json(null,200);
     }
 
     protected function show($id)
     {
-        return $this->model::find($id);
+        $data = $this->model::find($id);
+        if(!$data){
+            return response()->json(
+                ['errors'=>array(['code'=>404,'message'=>'Not found.'])],
+                404
+            );
+        }
+        return response()->json($data,200);
     }
 }
