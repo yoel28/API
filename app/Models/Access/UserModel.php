@@ -1,6 +1,6 @@
 <?php
 
-namespace Api;
+namespace Api\Models\Access;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class UserModel extends Authenticatable
 {
     use Notifiable;
+    protected $table = "users";
 
     /**
      * The attributes that are mass assignable.
