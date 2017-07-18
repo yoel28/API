@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,19 +12,25 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+function methodsBase():array {
+    return ['index', 'search', 'store', 'update', 'destroy', 'show'];
+}
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::pattern('id','\d+');
 
-Route::resource('auth','Auth\AuthenticateController');
+Route::post('login','Auth\AuthenticateController@Authenticate');
+Route::post('validate','Auth\AuthenticateController@getAuthenticatedUser');
+
 
 Route::group(['middleware' => ['jwt']], function () {
     Route::resource('access/accounts','Access\AccountController',
-        ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
+        ['only' => methodsBase()]
+    );
+    Route::resource('access/users','Access\UserController',
+        ['only' => methodsBase()]
     );
 
     Route::resource('business/rules','Business\RuleController',
-        ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
+        ['only' => methodsBase()]
     );
 });
