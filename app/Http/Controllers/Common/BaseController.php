@@ -10,9 +10,10 @@ class BaseController extends Controller
     private $_model;
     private $_request;
 
-    public function __construct($model,$request){
+    public function __construct($model,$request=null){//TODO:add request default
         $this->_model =  $model;
-        $this->_request =  new $request;
+        if($request)
+            $this->_request =  new $request;
     }
 
     protected function index(Request $req){
