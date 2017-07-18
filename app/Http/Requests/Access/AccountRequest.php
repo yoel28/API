@@ -4,7 +4,7 @@ namespace Api\Http\Requests\Access;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Account extends FormRequest
+class AccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class Account extends FormRequest
         return [
             "address" => "required|max:150",
             "contact" => "max:100",
-            "email" => "required|max:100|unique:email",
+            "email" => "required|max:100|unique:account|email",
             "favicon" => "mimes:jpeg,bmp,png",
             "hostname" => "required|max:150",
             "icon" => "mimes:jpeg,bmp,png",
