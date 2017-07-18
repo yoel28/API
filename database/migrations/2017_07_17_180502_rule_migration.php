@@ -15,7 +15,10 @@ class RuleMigration extends Migration
     {
         Schema::create('rule', function (Blueprint $table) {
             $table->integer('account_id')->unsigned();
-            $table->foreign('account_id')->references('account_id')->on('account');
+            $table->foreign('account_id')
+                    ->references('account_id')
+                    ->on('account')
+                    ->onDelete('cascade');
         });
 
         Schema::table('rule', function (Blueprint $table) {
