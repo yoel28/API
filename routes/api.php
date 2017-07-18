@@ -17,14 +17,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('access/accounts','Access\AccountController',
-    ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
-);
+Route::resource('auth','Auth\AuthenticateController');
 
-Route::resource('business/rules','Business\RuleController',
-    ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
-);
+Route::group(['middleware' => ['jwt']], function () {
+    Route::resource('access/accounts','Access\AccountController',
+        ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
+    );
 
-//Route::group(['middleware' => ['auth']], function () {
-//
-//});
+    Route::resource('business/rules','Business\RuleController',
+        ['only' => ['index', 'search', 'store', 'update', 'destroy', 'show']]
+    );
+});
