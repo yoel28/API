@@ -21,7 +21,7 @@ class AccountMigration extends Migration
             $table->text("favicon")->nullable(true);
             $table->string("hostname",150);
             $table->text("icon")->nullable(true);
-            $table->integer("max_user_count");
+            $table->integer("max_user_count")->default(1);
             $table->text("message")->nullable(true);
             $table->string("name",100);
             $table->string("phone",20)->nullable(true);
@@ -33,12 +33,12 @@ class AccountMigration extends Migration
             $table->increments('account_id');
 
             $table->text("detail")->nullable(true);
-            $table->boolean("editable");
+            $table->boolean("editable")->default(true);
             $table->string("code",100)->unique();
-            $table->boolean("enabled");
+            $table->boolean("enabled")->default(true);
             $table->text("images")->nullable(true);
             $table->string("title",100);
-            $table->boolean("visible");
+            $table->boolean("visible")->default(true);
         });
 
         Schema::table('account', function (Blueprint $table) {

@@ -22,12 +22,12 @@ class RuleMigration extends Migration
             $table->increments('rule_id');
 
             $table->text("detail")->nullable(true);
-            $table->boolean("editable");
+            $table->boolean("editable")->default(true);
             $table->string("code",100)->unique();
-            $table->boolean("enabled");
+            $table->boolean("enabled")->default(true);
             $table->text("images")->nullable(true);
             $table->string("title",100);
-            $table->boolean("visible");
+            $table->boolean("visible")->default(true);
         });
 
         Schema::table('rule', function (Blueprint $table) {
