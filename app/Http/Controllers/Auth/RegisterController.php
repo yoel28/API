@@ -2,7 +2,7 @@
 
 namespace Api\Http\Controllers\Auth;
 
-use Api\UserModel;
+use Api\Models\Access\UserModel;
 use Api\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
