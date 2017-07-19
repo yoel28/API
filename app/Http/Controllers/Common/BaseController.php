@@ -10,6 +10,8 @@ class BaseController extends Controller
     private $_model;
     private $_request;
 
+    protected $search = ['params_1'=>'code','params_2'=>'title'];
+
     public function __construct($model,$request=null){//TODO:add request default
         $this->_model =  $model;
         if($request)
@@ -70,14 +72,22 @@ class BaseController extends Controller
 
     protected function show($id)
     {
-        $data = $this->_model::find($id);
-        if(!$data){
-            return response()->json(
-                ['errors'=>['Not found']],
-                404
-            );
-        }
+        $data = $this->_model::findOrFail($id);//Use Handler -> ModelNotFoundException
         return response()->json($data,200);
+    }
+
+    protected function search($value = '')
+    {
+        $data = $this->_model::where($this->search['params_1'],'ilike','%'.$value.'%')
+            ->orWhere($this->search['params_2'],'ilike','%'.$value.'%')
+            ->limit(2)
+            ->offset(0)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $count = $this->_model::where('name','ilike','%'.$value.'%')->count();
+
+        return response()->json(['list'=>$data,'count'=>$count],200);
     }
 
 }
