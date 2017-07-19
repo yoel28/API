@@ -9,7 +9,7 @@ use Api\Models\Business\RuleModel;
 class RuleController extends BaseController
 {
     public function __construct(){
-        parent::__construct(RuleModel::class);
+        parent::__construct(RuleModel::class);//TODO: Agregar Request
     }
 
 }
