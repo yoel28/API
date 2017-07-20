@@ -44,7 +44,7 @@ Route::group(['middleware' => ['jwt.auth']], function () {
         });
     });
 
-    Route::group(['prefix' => 'businness'], function () {
+    Route::group(['prefix' => 'business'], function () {
         Route::resource('rules','Business\RuleController',
             ['only' => methodsBase()]
         );
