@@ -34,10 +34,6 @@ abstract class BaseRequest extends FormRequest
             );
     }
 
-    protected function authorize(){
-        return true;
-    }
-
     public function getRules():array{
         return [
             'code'=>'required|max:100|unique:'.$this->_table,
@@ -48,6 +44,14 @@ abstract class BaseRequest extends FormRequest
             'enabled'=>'',
             'visible' =>''
         ];
+    }
+
+    protected function authorize(){
+        return true;
+    }
+
+    protected function rules(){
+        return $this->getRules();
     }
 
 }
