@@ -8,8 +8,9 @@ use Api\Models\Access\AccountModel;
 
 class AccountController extends BaseController
 {
-    public function __construct(){
-        parent::__construct(AccountModel::class,AccountRequest::class);
+    public function __construct(AccountModel $model){
+        $this->model = $model;
+        $this->request = new AccountRequest;
     }
 
 }
