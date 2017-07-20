@@ -176,7 +176,10 @@ return [
         // Api\Providers\BroadcastServiceProvider::class,
         Api\Providers\EventServiceProvider::class,
         Api\Providers\RouteServiceProvider::class,
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class
+
+        //Custom
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 
