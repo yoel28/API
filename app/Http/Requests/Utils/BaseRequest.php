@@ -6,8 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 abstract class BaseRequest extends FormRequest
 {
-    protected $_table;
-    protected $_prefix = 'Request';
+    protected $table;
+    protected $prefix = 'Request';
 
     public function __construct(array $query = array(), array $request = array(), array $attributes = array(), array $cookies = array(), array $files = array(), array $server = array(), $content = null){
         $this->_init();
@@ -19,8 +19,8 @@ abstract class BaseRequest extends FormRequest
     }
 
     private function _setTable(){
-        if(!$this->_table){
-            $this->_table = $this->_nameClass();
+        if(!$this->table){
+            $this->table = $this->_nameClass();
         }
     }
 
@@ -28,7 +28,7 @@ abstract class BaseRequest extends FormRequest
         return
             strtolower(
                 str_replace(
-                    $this->_prefix, '',
+                    $this->prefix, '',
                     substr(get_called_class(), strrpos(get_called_class(), '\\') + 1)
                 )
             );
@@ -36,7 +36,7 @@ abstract class BaseRequest extends FormRequest
 
     public function getRules():array{
         return [
-            'code'=>'required|max:100|unique:'.$this->_table,
+            'code'=>'required|max:100|unique:'.$this->table,
             'title'=>'required|max:100',
             'detail'=>'',
             'images'=>'',
