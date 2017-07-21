@@ -12,6 +12,10 @@
 */
 
 Route::get('/', function () {
-    return ["name"=>"yoel"];
+    return [
+        'info'=>'public root',
+        'version'=>'V1'
+
+    ];
 });
 
