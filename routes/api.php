@@ -37,10 +37,15 @@ Route::group(['middleware' => ['jwt.auth']], function () {
         Route::resource('users','Access\UserController',
             ['only' => methodsBase()]
         );
+        //TODO: resource role.user
+        Route::resource('roles','Access\RoleController',
+            ['only' => methodsBase()]
+        );
 
         Route::group(['prefix' => 'search'], function () {
             Route::get('accounts/{value?}', 'Access\AccountController@search');
             Route::get('users/{value?}', 'Access\UserController@search');
+            Route::get('roles/{value?}', 'Access\RoleController@search');
         });
     });
 
