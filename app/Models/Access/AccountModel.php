@@ -2,7 +2,7 @@
 
 namespace Api\Models\Access;
 
-use Api\Models\Common\BaseModel;
+use Api\Models\Utils\BaseModel;
 
 class AccountModel extends BaseModel
 {

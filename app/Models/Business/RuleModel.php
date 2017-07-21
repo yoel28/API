@@ -3,7 +3,7 @@
 namespace Api\Models\Business;
 
 use Api\Models\Access\AccountModel;
-use Api\Models\Common\BaseModel;
+use Api\Models\Utils\BaseModel;
 
 
 class RuleModel extends BaseModel

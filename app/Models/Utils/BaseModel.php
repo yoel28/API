@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Models\Common;
+namespace Api\Models\Utils;
 
 class BaseModel extends AuditModel
 {
