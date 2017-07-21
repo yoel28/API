@@ -9,8 +9,8 @@ class UserController extends BaseController
 {
     protected $search = ['params_1'=>'email','params_2'=>'name'];
 
-    public function __construct(){
-        parent::__construct(UserModel::class);//TODO:add request
+    public function __construct(UserModel $model){//TODO: Falta el request
+        $this->model = $model;
     }
 
 }
