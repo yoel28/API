@@ -20,7 +20,7 @@ class BaseMigration extends Migration
     public function down()
     {
         if($this->table){
-
+            Schema::dropIfExists($this->table);
         }
     }
 
@@ -30,8 +30,8 @@ class BaseMigration extends Migration
             $table->string("code",100)->unique();
             $table->string("title",100);
 
-            $table->text("detail")->nullable(true);
-            $table->text("images")->nullable(true);
+            $table->text("detail")->nullable();
+            $table->text("images")->nullable();
 
             $table->boolean("editable")->default(true);
             $table->boolean("enabled")->default(true);
@@ -43,8 +43,8 @@ class BaseMigration extends Migration
     public function auditMigration(){
         Schema::table($this->table, function (Blueprint $table) {
 
-            $table->text("ip")->nullable(true);
-            $table->text("user_agent")->nullable(true);
+            $table->text("ip")->nullable();
+            $table->text("user_agent")->nullable();
 
             $table->timestamps();
             $table->softDeletes();
