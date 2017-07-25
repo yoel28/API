@@ -14,10 +14,12 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        // Access
         factory(\Api\Models\Access\AccountModel::class, 10)->create();
         factory(\Api\Models\Access\RoleModel::class, 5)->create();
         factory(\Api\Models\Access\UserModel::class, 20)->create();
 
+        //Business
         factory(\Api\Models\Business\RuleModel::class, 200)->create();
 
         Model::reguard();
