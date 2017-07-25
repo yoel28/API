@@ -13,6 +13,7 @@ class RuleMigration extends BaseMigration
 
             $table->increments('rule_id');
             $table->integer('account_id')->unsigned();
+
             $table->foreign('account_id')
                     ->references('account_id')
                     ->on('account')
@@ -21,9 +22,5 @@ class RuleMigration extends BaseMigration
         });
         $this->baseMigration();
         $this->auditMigration();
-    }
-
-    public function down(){
-        Schema::dropIfExists($this->table);
     }
 }

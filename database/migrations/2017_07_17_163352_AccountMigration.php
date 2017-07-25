@@ -20,22 +20,18 @@ class AccountMigration extends BaseMigration
 
             $table->integer("max_user_count")->default(1);
 
-            $table->string("contact",100)->nullable(true);
-            $table->string("phone",20)->nullable(true);
-            $table->string("url",150)->nullable(true);
+            $table->string("contact",150)->nullable();
+            $table->string("phone",50)->nullable();
+            $table->string("url",150)->nullable();
 
-            $table->text("favicon")->nullable(true);
-            $table->text("icon")->nullable(true);
-            $table->text("message")->nullable(true);
+            $table->text("favicon")->nullable();
+            $table->text("icon")->nullable();
+            $table->text("message")->nullable();
 
-            $table->json("preferences")->nullable(true);
+            $table->json("preferences")->default('{}');
 
         });
         $this->baseMigration();
         $this->auditMigration();
-    }
-
-    public function down(){
-        Schema::dropIfExists($this->table);
     }
 }

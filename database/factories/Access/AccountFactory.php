@@ -19,7 +19,6 @@ $factory->define(AccountModel::class, function (Faker\Generator $faker) {
             'name'=>$faker->name,
             'title'=>$faker->name,
             'phone'=>$faker->phoneNumber,
-            'preferences'=>'{}',
             'url'=>$faker->url
         ]
     );
