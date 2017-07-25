@@ -12,11 +12,11 @@ class RoleModel extends BaseModel
     protected $appends = ['users','permissions'];
     protected $hidden = ['role_id','images'];
 
-    protected function getUsersAttributes(){
+    protected function getUsersAttribute(){
 
     }
 
-    protected function getPermissionsAttributes(){
+    protected function getPermissionsAttribute(){
 
     }
 }
