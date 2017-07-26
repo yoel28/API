@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth'], function () {
     }]);
 });
 
-Route::group(['middleware' => ['jwt.auth']], function () {
+Route::group(['middleware' => ['jwt.auth','params.rest']], function () {
 
     Route::group(['prefix' => 'access'], function () {
         Route::resource('accounts','Access\AccountController',
