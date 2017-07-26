@@ -6,7 +6,7 @@ $factory->define(AccountModel::class, function (Faker\Generator $faker) {
     $size = 1;
 
     return array_merge(
-        getBaseFactory($faker),
+        getBaseFactory($faker,'ACCOUNT_'),
         [
             'address'=>$faker->address,
             'contact'=>$faker->jobTitle,

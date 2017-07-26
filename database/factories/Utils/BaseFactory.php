@@ -1,9 +1,9 @@
 <?php
 
-function getBaseFactory (Faker\Generator $faker) {
+function getBaseFactory (Faker\Generator $faker,$prefix='COD_') {
     $size = 1;
     return [
-        'code'=>'COD_'.$faker->unique()->countryCode,
+        'code'=>$prefix.$faker->unique()->countryCode,
         'title'=>$faker->name,
         'detail'=>$faker->text(10),
 //        'images'=>image64($faker->image(null,$size,$size)),
