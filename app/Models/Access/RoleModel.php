@@ -6,17 +6,14 @@ use Api\Models\Utils\BaseModel;
 
 class RoleModel extends BaseModel
 {
-    //TODO: ADD relationship role-user
-    //TODO: ADD relationship role-permissions
 
-    protected $appends = ['users','permissions'];
+    protected $appends = ['permissions'];
     protected $hidden = ['role_id','images'];
 
-    protected function getUsersAttribute(){
-
-    }
-
+    //TODO: add associate permissions
     protected function getPermissionsAttribute(){
 
     }
+
+
 }
