@@ -21,10 +21,11 @@ class UserMigration extends \Api\Models\Utils\BaseMigration
 
             $table->boolean('accountLocked')->default(true);
 
-            $table->string('remember_token')->nullable();
             $table->string('phone',50)->nullable();
 
             $table->json('preferences')->default('{}');
+
+            $table->rememberToken();
 
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')
