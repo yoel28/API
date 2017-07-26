@@ -11,8 +11,4 @@ class AccountModel extends BaseModel
 
     protected $hidden = ['account_id'];
 
-    public function rules()
-    {
-        return $this->hasMany(\Api\Models\Business\RuleModel::class,'account_id','account_id');
-    }
 }
