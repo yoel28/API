@@ -1,22 +1,27 @@
 <?php
 
 namespace Api\Http\Controllers\Common;
+use Api\Events\ActionsEvents;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 
 class BaseController extends Controller{
 
     protected $model;
     protected $request;
 
-    protected $search = ['params_1'=>'code','params_2'=>'title'];
+
+    protected $keysSearch = ['code','title'];
 
     protected function index(Request $req){
-//        var_dump($request->query('max','max'));
+        event(new ActionsEvents('get'));
+        $data = $this->model::rest($req->rest);
         return  response()->json(
-            ['list'=>$this->model::all()],
+            [
+                'list'=>$data->get(),
+                'count'=>$data->count()
+            ],
             200
         );
     }
@@ -43,9 +48,9 @@ class BaseController extends Controller{
             return response()->json($data, 201);
 
         }catch (Exception $e) {
-            Log::info('Error creating '.$this->model.': '.$e);
+            \Log::info('Error creating '.$this->model.': '.$e);
             return response()->json(
-                ['errors' => ['Internal server error']],
+                ['errors' =>[['Internal server error']]],
                 500
             );
         }
@@ -53,7 +58,7 @@ class BaseController extends Controller{
     }
 
     protected function update(Request $req, $id){
-        $data = $this->model::find($id);
+        $data = $this->model::findOrFail($id);
         $data->update($req->all());
         return response()->json($data,200);
     }
@@ -68,17 +73,23 @@ class BaseController extends Controller{
         return response()->json($data,200);
     }
 
-    protected function search($value = ''){
-        $data = $this->model::where($this->search['params_1'],'ilike','%'.$value.'%')
-            ->orWhere($this->search['params_2'],'ilike','%'.$value.'%')
-            ->limit(2)
-            ->offset(0)
-            ->orderBy('id', 'desc')
-            ->get();
 
-        $count = $this->model::where('name','ilike','%'.$value.'%')->count();
+    protected function search(Request $req,$value = ''){
 
-        return response()->json(['list'=>$data,'count'=>$count],200);
+        $data = $this->model::where(
+                array_map(function ($key) use ($value){
+                    return [$key,'ilike','%'.$value.'%','or'];
+                },$this->keysSearch)
+            )
+            ->rest($req->rest);
+
+        return  response()->json(
+            [
+                'list'=>$data->get(),
+                'count'=>$data->count()
+            ],
+            200
+        );
     }
 
 }
