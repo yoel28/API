@@ -12,13 +12,9 @@ class BaseModel extends AuditModel
     }
 
     private function _initModel(){
-
-        $this->_setTable();
-        $this->_setPK();
-
         $this->_addHiddenBase();
         $this->_addFillabel();
-
+        $this->_setTable();
     }
 
     protected function _addHiddenBase(){
@@ -34,12 +30,6 @@ class BaseModel extends AuditModel
     private function _setTable(){
         if(!$this->table){
             $this->setTable($this->_nameClass());
-        }
-    }
-
-    private function _setPK(){
-        if($this->primaryKey == 'id'){
-            $this->primaryKey = $this->_nameClass() . '_id';
         }
     }
 
