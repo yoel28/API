@@ -34,18 +34,22 @@ Route::group(['middleware' => ['jwt.auth','params.rest']], function () {
         Route::resource('accounts','Access\AccountController',
             ['only' => methodsBase()]
         );
-        Route::resource('users','Access\UserController',
+        Route::resource('permissions','Access\PermissionController',
             ['only' => methodsBase()]
         );
         //TODO: resource role.user
         Route::resource('roles','Access\RoleController',
             ['only' => methodsBase()]
         );
+        Route::resource('users','Access\UserController',
+            ['only' => methodsBase()]
+        );
 
         Route::group(['prefix' => 'search'], function () {
             Route::get('accounts/{value?}', 'Access\AccountController@search');
-            Route::get('users/{value?}', 'Access\UserController@search');
+            Route::get('permissions/{value?}', 'Access\PermissionController@search');
             Route::get('roles/{value?}', 'Access\RoleController@search');
+            Route::get('users/{value?}', 'Access\UserController@search');
         });
     });
 
@@ -53,9 +57,9 @@ Route::group(['middleware' => ['jwt.auth','params.rest']], function () {
         Route::resource('rules','Business\RuleController',
             ['only' => methodsBase()]
         );
+
         Route::group(['prefix' => 'search'], function () {
             Route::get('rules/{value?}', 'Business\RuleController@search');
         });
-
     });
 });
