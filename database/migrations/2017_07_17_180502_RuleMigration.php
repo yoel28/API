@@ -11,11 +11,11 @@ class RuleMigration extends BaseMigration
     public function up(){
         Schema::create($this->table, function (Blueprint $table) {
 
-            $table->increments('rule_id');
+            $table->increments('id');
             $table->integer('account_id')->unsigned();
 
             $table->foreign('account_id')
-                    ->references('account_id')
+                    ->references('id')
                     ->on('account')
                     ->onDelete('cascade');
 

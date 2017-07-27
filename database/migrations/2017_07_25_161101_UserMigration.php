@@ -11,7 +11,7 @@ class UserMigration extends \Api\Models\Utils\BaseMigration
     public function up(){
         Schema::create($this->table, function (Blueprint $table) {
 
-            $table->increments('user_id');
+            $table->increments('id');
 
             $table->string('email',150)->unique();
             $table->string('username',50)->unique();
@@ -29,7 +29,7 @@ class UserMigration extends \Api\Models\Utils\BaseMigration
 
             $table->integer('account_id')->unsigned();
             $table->foreign('account_id')
-                ->references('account_id')
+                ->references('id')
                 ->on('account')
                 ->onDelete('cascade');
 

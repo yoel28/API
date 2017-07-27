@@ -11,7 +11,7 @@ class RoleMigration extends BaseMigration
         //TODO: ADD relationship role-user
         //TODO: ADD relationship role-permissions
         Schema::create($this->table, function (Blueprint $table) {
-            $table->increments('role_id');
+            $table->increments('id');
         });
 
         $this->baseMigration();

@@ -11,7 +11,7 @@ class AccountMigration extends BaseMigration
     public function up(){
         Schema::create($this->table, function (Blueprint $table) {
 
-            $table->increments('account_id');
+            $table->increments('id');
 
             $table->string("address",150);
             $table->string("email",100);
