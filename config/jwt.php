@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'identifier' => 'user_id', //Id tabla user
+    'identifier' => 'id', //Id tabla user
 
     /*
     |--------------------------------------------------------------------------
