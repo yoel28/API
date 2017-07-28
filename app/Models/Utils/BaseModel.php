@@ -5,6 +5,7 @@ namespace Api\Models\Utils;
 class BaseModel extends AuditModel
 {
     protected $_prefix = 'Model';
+    protected $max = 15;
 
     public function __construct(array $attributes = []){
         $this->_initModel();
@@ -42,5 +43,15 @@ class BaseModel extends AuditModel
                 )
             );
     }
+
+    public function scopeRest($query, $params)
+    {
+        return $query
+            ->where($params['where']?:[])
+            ->limit($this->max > $params['max']?$params['max']:$this->max)
+            ->offset($params['offset'])
+            ->orderBy($params['sort'], $params['order']);
+    }
+
 
 }
