@@ -7,7 +7,7 @@ use Api\Models\Access\UserModel;
 
 class UserController extends BaseController
 {
-    protected $search = ['params_1'=>'email','params_2'=>'name'];
+    protected $keysSearch = ['email','name'];
 
     public function __construct(UserModel $model){//TODO: Falta el request
         $this->model = $model;
