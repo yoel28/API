@@ -2,6 +2,7 @@
 namespace Api\Traits;
 
 use Api\Models\Access\AccountModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait OwnerAccount{
@@ -28,8 +29,8 @@ trait OwnerAccount{
             'id'
         );
     }
-    protected function getAccountAttribute(){
-        return $this->account()->get(['code','title'])[0];
+    protected function getAccountAttribute():Model{
+        return $this->account()->get(['code','title'])->first();
     }
 
 }
