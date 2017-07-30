@@ -3,17 +3,11 @@
 namespace Api\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ParamsRest
 {
-    private $params = [
-        'max'=>15,
-        'order'=>'desc',
-        'sort'=>'id',
-        'offset'=>0,
-        'where'=>[]
-    ];
-
     /**
      * Handle an incoming request.
      *
@@ -24,23 +18,32 @@ class ParamsRest
     public function handle($request, Closure $next)
     {
         \DB::enableQueryLog();
-        $this->params['max'] = $request->query('max','15');
-        $this->params['max'] = is_numeric($this->params['max'])?abs(+$this->params['max']):15;
-
-        $this->params['offset'] = $request->query('offset','0');
-        $this->params['offset'] = is_numeric($this->params['offset'])?abs(+$this->params['max']):0;
-
-        $this->params['order'] = $request->query('order','desc');
-        $this->params['sort'] = $request->query('sort','id');
-        $this->params['where'] = json_decode($request->query('where','[]'));
-
-        $request['rest'] = $this->params;
-
-        return $next($request);
+        $request['rest'] = $this->loadRest($request);
+        if(\Auth::user()->hasPermission(Route::getCurrentRoute()->getActionName())){
+            return $next($request);
+        }
+        return response('Unauthorized',401);
     }
 
     public function terminate($request, $response){
         \Log::info('query:\n'.json_encode(\DB::getQueryLog()));
+//        dd(\DB::getQueryLog());
+    }
+
+    private function loadRest(Request $request):array {
+        $params=[];
+
+        $params['max'] = $request->query('max','15');
+        $params['max'] = is_numeric($params['max'])?abs(+$params['max']):15;
+
+        $params['offset'] = $request->query('offset','0');
+        $params['offset'] = is_numeric($params['offset'])?abs(+$params['max']):0;
+
+        $params['order'] = $request->query('order','desc');
+        $params['sort'] = $request->query('sort','id');
+        $params['where'] = json_decode($request->query('where','[]'));
+
+        return $params;
     }
 
 }
