@@ -4,6 +4,7 @@ namespace Api\Models\Access;
 
 use Api\Models\Utils\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection;
 
 class RoleModel extends BaseModel
 {
@@ -11,12 +12,11 @@ class RoleModel extends BaseModel
     protected $appends = ['permissions'];
     protected $hidden = ['id','images'];
 
-    protected function getPermissionsAttribute(){
-        return $this->permissions()->get([])->map(function ($data) {
-            return $data['pivot']['permission_id'];
-        });
+    public function getPermissionsAttribute():Collection{
+        return $this->permissions()->get()->pluck('code');
     }
-    protected function permissions():BelongsToMany{
+
+    public function permissions():BelongsToMany{
         return $this->belongsToMany(
             PermissionModel::class,
             'permission_role',
