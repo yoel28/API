@@ -14,8 +14,8 @@ trait HasPermission{
                 );
     }
 
-    protected function getPermissionsAttribute():array {
-        return $this->permissions()->unique()->all();
+    protected function getPermissionsAttribute(): Collection {
+        return $this->permissions()->unique();
     }
 
     protected function permissions():Collection {
