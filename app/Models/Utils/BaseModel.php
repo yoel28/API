@@ -2,6 +2,8 @@
 
 namespace Api\Models\Utils;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class BaseModel extends AuditModel
 {
     protected $_prefix = 'Model';
@@ -35,8 +37,7 @@ class BaseModel extends AuditModel
     }
 
     private function _nameClass():string {
-        return
-            strtolower(
+        return strtolower(
                 str_replace(
                     $this->_prefix, '',
                     substr(get_called_class(), strrpos(get_called_class(), '\\') + 1)
@@ -44,8 +45,7 @@ class BaseModel extends AuditModel
             );
     }
 
-    public function scopeRest($query, $params)
-    {
+    public function scopeRest(Builder $query,array $params){
         return $query
             ->where($params['where']?:[])
             ->limit($this->max > $params['max']?$params['max']:$this->max)
