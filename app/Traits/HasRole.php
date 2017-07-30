@@ -4,6 +4,7 @@ namespace Api\Traits;
 
 use Api\Models\Access\RoleModel;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection;
 
 trait HasRole{
 
@@ -16,8 +17,9 @@ trait HasRole{
         );
     }
 
-    protected function getRolesAttribute(){
-        return $this->roles()->allRelatedIds()->all();
+    protected function getRolesAttribute():Collection{
+        return $this->roles()->get()->pluck('code');
+//        return $this->roles()->allRelatedIds();
     }
 
 
