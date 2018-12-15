@@ -26,7 +26,7 @@ class ParamsRest
     }
 
     public function terminate($request, $response){
-        \Log::info('query:\n'.json_encode(\DB::getQueryLog()));
+//        \Log::info('query:\n'.json_encode(\DB::getQueryLog()));
 //        dd(\DB::getQueryLog());
     }
 
